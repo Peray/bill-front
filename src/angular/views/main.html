@@ -1,0 +1,83 @@
+<div class="panel panel-primary main" ng-init="init()">
+	<h3 class="panel-heading">账单系统</h3>
+	<div class="panel-body">
+		<table class="table table-striped table-bordered">
+			<thead>
+				<tr>
+					<th>名称</th>
+					<th>账单日</th>
+					<th>还款日</th>
+					<th ng-repeat="item in months">{{item}}</th>
+					<th class="text-center">操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="item in products | orderBy: 'num': desc track by $index" ng-click="queryById(item.id)">
+					<td>{{item.name}}</td>
+					<td>{{item.startDate}}号</td>
+					<td ng-class="{'active': currentDay == item.endDate}">{{item.endDate}}号</td>
+					<td ng-bind="item.curMon ? item.curMon : null | currency:'￥'"></td>
+					<td ng-bind="item.nextMon ? item.nextMon : null | currency:'￥'"></td>
+					<td class="text-center">
+						<button class="btn btn-xs btn-primary" ng-click="deleteProduct(item.id)">
+							<span class="glyphicon glyphicon-trash" aria-hidden="true" data-dismiss="alert"></span>
+						</button>
+						<button class="btn btn-xs btn-primary" ng-click="editOrCreateProduct(item)">
+							<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+						</button>
+					</td>
+				</tr>
+				<tr class="primary">
+					<td class="text-center" colspan="3">合计</td>
+					<td ng-repeat="item in totals track by $index" ng-bind="item ? item : null | currency:'￥'"></td>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+		<div>
+			<button class="btn btn-xs btn-primary" ng-click="listProducts()">刷新</button>
+			<button class="btn btn-xs btn-primary" ng-click="editOrCreateProduct()">新增</button>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="editAccounts" tabindex="-1" role="dialog" aria-labelledby="editAccounts">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 ng-if="isEdit" class="modal-title">编辑</h4>
+				<h4 ng-if="!isEdit" class="modal-title">新建</h4>
+			</div>
+			<div class="modal-body">
+				<form novalidate>
+					<div class="form-group">
+						<label>名称:</label>
+						<input type="text" class="form-control" ng-model="currentProduct.name" />
+					</div>
+					<div class="form-group">
+						<label>账单日：</label>
+						<input type="text" class="form-control" ng-model="currentProduct.startDate" />
+					</div>
+					<div class="form-group">
+						<label>还款日：</label>
+						<input type="text" class="form-control" ng-model="currentProduct.endDate" />
+					</div>
+					<div class="form-group">
+						<label>本月：</label>
+						<input type="text" class="form-control" ng-model="currentProduct.curMon" />
+					</div>
+					<div class="form-group">
+						<label>下月：</label>
+						<input type="text" class="form-control" ng-model="currentProduct.nextMon" />
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+				<button type="button" class="btn btn-primary" ng-click="saveEdit(currentProduct)">保存</button>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,18 @@
+<div class="bg"></div>
+<div class="well login">
+	<div class="alert alert-info" ng-hide="authenticationError">请输入您的账户和密码</div>
+	<div class="alert alert-danger" ng-show="authenticationError">账户密码错误请重试</div>
+	<form name="authForm" novalidate>
+		<div class="form-group">
+			<label>用户名：</label>
+			<input type="text" name="username" class="form-control" ng-model="username" required />
+		</div>
+		<div class="form-group">
+			<label>密码：</label>
+			<input type="password" name="password" class="form-control" ng-model="password" required />
+		</div>
+		<div class="text-center">
+			<button class="btn btn-primary" ng-click="authenticate(username, password)" ng-disabled="authForm.$invalid">登录</button>
+		</div>
+	</form>
+</div>
