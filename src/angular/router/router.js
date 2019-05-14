@@ -4,10 +4,10 @@ commonApp.config(['$routeProvider', '$locationProvider', function($routeProvider
 	
 	$routeProvider
 	.when('/login', {
-		templateUrl: 'src/angular/views/login.html',
+		templateUrl: './angular/views/login.html',
 		controller:'loginCtrl'
 	}).when('/main', {
-		templateUrl: 'src/angular/views/main.html',
+		templateUrl: './angular/views/main.html',
 		controller:'mainCtrl'
 	}).otherwise({
 		redirectTo: '/login'

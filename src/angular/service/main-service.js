@@ -1,4 +1,4 @@
-commonApp.service('mainService', function($cacheFactory, $q, $http, config) {
+commonApp.service('mainService', ['$cacheFactory', '$q', '$http', 'config', function($cacheFactory, $q, $http, config) {
     var cache = $cacheFactory('mainService');
     var localhost = config.localhost;
 
@@ -68,4 +68,4 @@ commonApp.service('mainService', function($cacheFactory, $q, $http, config) {
 
         return deferred.promise;
     };
-});
+}]);
