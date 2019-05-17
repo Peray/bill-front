@@ -53,7 +53,7 @@ gulp.task('libs', function () {
 gulp.task('angularJs', gulpFolders('src/angular', function (folder) {
     return gulp.src(path.join('src/angular', folder, '/**/*.js'))
         .pipe(concat(folder + '.js'))
-        .pipe(uglify())
+        // .pipe(uglify())
         .pipe(gulp.dest('dist/angular'));
 }));
 
